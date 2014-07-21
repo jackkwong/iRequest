@@ -38,6 +38,8 @@
 - (void)uploadImage:(UIImage *)image
 {
     
+    // TODO Support other image format
+    
     NSData *imageData;
     NSString *urlToSubmitImageTo, *parameterNameForImage;
     
@@ -54,7 +56,7 @@
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         
         timestamp = [dateFormatter stringFromDate:[NSDate date]];
-        filenameWithTimestamp = [NSString stringWithFormat:@"IMAGE %@", timestamp];
+        filenameWithTimestamp = [NSString stringWithFormat:@"IMAGE %@.png", timestamp];
         
         addFile(imageData, parameterNameForImage, filenameWithTimestamp);
         
