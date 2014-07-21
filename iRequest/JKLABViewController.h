@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JKLABViewController : UIViewController
+@interface JKLABViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
