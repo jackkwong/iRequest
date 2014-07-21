@@ -1,0 +1,42 @@
+PODS:
+  - ChuzzleKit (1.0.3)
+  - OMGHTTPURLRQ (1.1.4):
+    - ChuzzleKit
+    - OMGHTTPURLRQ/RQ
+    - OMGHTTPURLRQ/UserAgent
+    - OMGHTTPURLRQ/UserAgent
+  - OMGHTTPURLRQ/RQ (1.1.4):
+    - ChuzzleKit
+    - OMGHTTPURLRQ/UserAgent
+  - OMGHTTPURLRQ/UserAgent (1.1.4):
+    - ChuzzleKit
+    - OMGHTTPURLRQ/UserAgent
+  - PromiseKit (0.9.11.1):
+    - PromiseKit/defaults
+  - PromiseKit/base (0.9.11.1)
+  - PromiseKit/defaults (0.9.11.1):
+    - PromiseKit/Foundation
+    - PromiseKit/UIKit
+  - PromiseKit/Foundation (0.9.11.1):
+    - ChuzzleKit
+    - OMGHTTPURLRQ
+    - PromiseKit/base
+  - PromiseKit/private (0.9.11.1)
+  - PromiseKit/UIKit (0.9.11.1):
+    - PromiseKit/base
+    - PromiseKit/private
+  - SDWebImage (3.7.0):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.7.0)
+
+DEPENDENCIES:
+  - PromiseKit
+  - SDWebImage
+
+SPEC CHECKSUMS:
+  ChuzzleKit: 2d6a1f9ba844ebca126642990106b8c24de117f7
+  OMGHTTPURLRQ: ca928b53ae60cb4cc078d8f7201f4f647f435351
+  PromiseKit: 88cc9c62635d929a556b6c91cc96dcbfa16e692d
+  SDWebImage: 791cb0f588046cb0bb7802ae8ae8f5462947b773
+
+COCOAPODS: 0.33.1
