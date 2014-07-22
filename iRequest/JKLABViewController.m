@@ -10,6 +10,7 @@
 #import "PromiseKit.h"
 #import "PromiseKit+Foundation.h"
 #import "OMGHTTPURLRQ.h"
+#import "UIImage+fixOrientation.h"
 
 @interface JKLABViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *uiUrlToSubmitToTextField;
@@ -17,6 +18,11 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *uiCameraBarButtonItem;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *uiFindFromGalleryBarButtonItem;
 @property (weak, nonatomic) IBOutlet UIImageView *uiUploadedImageImageView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *uiImageFormatSegmentedControl;
+@property (weak, nonatomic) IBOutlet UILabel *uiJpgCompressionQualityLabel;
+@property (weak, nonatomic) IBOutlet UISlider *uiJpgCompressionQualitySlider;
+@property (weak, nonatomic) IBOutlet UIView *uiJpgImageConfigPanelView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintJpgImageConfigPanelViewHeight;
 @end
 
 @implementation JKLABViewController
@@ -25,6 +31,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    // Synchronize UI with default value
+    [self updateCompressionQualityLabel];
+    
+    // Observe controls' values to later update ui correspondingly
+    [self.uiImageFormatSegmentedControl addObserver:self forKeyPath:@"selectedSegmentIndex" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:NULL];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,15 +51,29 @@
 - (void)uploadImage:(UIImage *)image
 {
     
-    // TODO Support other image format
-    
-    NSData *imageData;
     NSString *urlToSubmitImageTo, *parameterNameForImage;
+    UIImage *imageWithoutExifFlag;
+    NSData *imageData;
     
     urlToSubmitImageTo = self.uiUrlToSubmitToTextField.text;
     parameterNameForImage = self.uiImageParameterNameTextField.text;
     
-    imageData = UIImagePNGRepresentation(image);
+    imageWithoutExifFlag = [image fixOrientation];
+    
+    switch (self.uiImageFormatSegmentedControl.selectedSegmentIndex) {
+        case 0:{
+            // PNG
+            imageData = UIImagePNGRepresentation(imageWithoutExifFlag);
+            break;
+        }
+        case 1:{
+            //JPG
+            CGFloat compressionQuality;
+            compressionQuality = self.uiJpgCompressionQualitySlider.value;
+            imageData = UIImageJPEGRepresentation(imageWithoutExifFlag, compressionQuality);
+            break;
+        }
+    }
     
     NSMutableURLRequest *req = [OMGHTTPURLRQ POST:urlToSubmitImageTo multipartForm:^(void (^addFile)(NSData *, NSString *name, NSString *filename)){
         
@@ -78,13 +105,45 @@
 
 }
 
+- (void) updateCompressionQualityLabel
+{
+    NSString *compressionQuality;
+    
+    compressionQuality = [NSString stringWithFormat:@"%.03f", self.uiJpgCompressionQualitySlider.value];
+    self.uiJpgCompressionQualityLabel.text = compressionQuality;
+}
+
+
+// Binding
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (object == self.uiImageFormatSegmentedControl) {
+        
+        switch (self.uiImageFormatSegmentedControl.selectedSegmentIndex) {
+                
+            case 0:
+                //PNG
+                [self.uiJpgImageConfigPanelView setHidden:YES];
+                self.constraintJpgImageConfigPanelViewHeight.constant = 0;
+                break;
+                
+            case 1:
+                //JPG
+                [self.uiJpgImageConfigPanelView setHidden:NO];
+                self.constraintJpgImageConfigPanelViewHeight.constant = 53;
+                break;
+                
+        }
+        
+    }
+}
 
 
 // Non-UI Event Handlers
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    
     UIImage *image;
     
     image = [info valueForKey:UIImagePickerControllerOriginalImage];
@@ -93,18 +152,19 @@
     [self uploadImage:image];
     
     [self dismissViewControllerAnimated:YES completion:NULL];
-    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    
     [self dismissViewControllerAnimated:YES completion:NULL];
-    
 }
 
 
 // UI Event Handlers
+- (IBAction)actionUpdateCompressionQualityLabel:(id)sender {
+    [self updateCompressionQualityLabel];
+}
+
 - (IBAction)actionHideSoftKeyboard:(id)sender {
     [sender resignFirstResponder];
 }

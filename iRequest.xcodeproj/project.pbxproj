@@ -21,6 +21,7 @@
 		84FE28A2197D001B0096A9B5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FE2884197D001B0096A9B5 /* UIKit.framework */; };
 		84FE28AA197D001B0096A9B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84FE28A8197D001B0096A9B5 /* InfoPlist.strings */; };
 		84FE28AC197D001B0096A9B5 /* iRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FE28AB197D001B0096A9B5 /* iRequestTests.m */; };
+		84FE28ED197E5BAA0096A9B5 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FE28EC197E5BAA0096A9B5 /* UIImage+fixOrientation.m */; };
 		CCF5952F553B4926872D9FCD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3046E2E78049D8B55CC1A9 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,8 @@
 		84FE28A7197D001B0096A9B5 /* iRequestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iRequestTests-Info.plist"; sourceTree = "<group>"; };
 		84FE28A9197D001B0096A9B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84FE28AB197D001B0096A9B5 /* iRequestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iRequestTests.m; sourceTree = "<group>"; };
+		84FE28EB197E5BAA0096A9B5 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		84FE28EC197E5BAA0096A9B5 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		EB73E469C899416EB2746FEE /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +126,8 @@
 				84FE2892197D001B0096A9B5 /* Main.storyboard */,
 				84FE2895197D001B0096A9B5 /* JKLABViewController.h */,
 				84FE2896197D001B0096A9B5 /* JKLABViewController.m */,
+				84FE28EB197E5BAA0096A9B5 /* UIImage+fixOrientation.h */,
+				84FE28EC197E5BAA0096A9B5 /* UIImage+fixOrientation.m */,
 				84FE2898197D001B0096A9B5 /* Images.xcassets */,
 				84FE2887197D001B0096A9B5 /* Supporting Files */,
 			);
@@ -293,6 +298,7 @@
 			files = (
 				84FE288D197D001B0096A9B5 /* main.m in Sources */,
 				84FE2891197D001B0096A9B5 /* JKLABAppDelegate.m in Sources */,
+				84FE28ED197E5BAA0096A9B5 /* UIImage+fixOrientation.m in Sources */,
 				84FE2897197D001B0096A9B5 /* JKLABViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
